@@ -1,0 +1,19 @@
+import { Injectable } from '@nestjs/common';
+import { PostRepoService } from '../repositories/post.repo';
+import { SearchPostDto } from '../dto/search-post.dto';
+import { IPageable } from 'src/shared/filtering';
+import { PostResponseDto } from '../dto/post-response.dto';
+
+@Injectable()
+export class SearchPostsService {
+  constructor(private readonly postrepo: PostRepoService) {}
+  async search(dto: SearchPostDto): Promise<IPageable<PostResponseDto>> {
+    const where: any = {};
+    if (dto.title) where.title = dto.title;
+    if (dto.categoryId) where.category = { id: dto.categoryId };
+    if (dto.page) where.$page = dto.page;
+    if (dto.limit) where.$perPage = dto.limit;
+
+    return this.postrepo.pagedAsync(where);
+  }
+}
