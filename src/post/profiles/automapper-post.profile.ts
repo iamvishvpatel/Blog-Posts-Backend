@@ -36,9 +36,17 @@ export class PostProfile extends AutomapperProfile {
       // createMap(mapper, Post, PostResponseDto)
       createMap(mapper, User, UserMainDto);
       // createMap(mapper, Post, PostMainDto)
-      createMap(mapper, Permission, PermissionMainDto)
-      createMap(mapper, Role, RoleMainDto);
-      createMap(mapper, Permission, PermissionMainDto)
+      createMap(mapper, Permission, PermissionMainDto);
+      // createMap(mapper, Permission, PermissionMainDto);
+      createMap(
+        mapper,
+        Role,
+        RoleMainDto,
+        forMember(
+          (dto) => dto.permissions,
+          mapFrom((src) => src.permissions),
+        ),
+      );
       createMap(mapper, Comment, CommentMainDto);
       createMap(mapper, Profile, ProfileMainDto);
       createMap(mapper, Category, CategoryMainDto);
@@ -64,6 +72,7 @@ export class PostProfile extends AutomapperProfile {
           (dto) => dto.comments,
           mapFrom((src) => src.comments),
         ),
+        forMember((dto) => dto.updatedBy, mapFrom((src) => src.updatedBy)),
       );
     };
   }

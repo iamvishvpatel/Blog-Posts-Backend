@@ -38,6 +38,7 @@ export class User {
   // @Column({ nullable: true })
   // role: string;
 
+  @AutoMap()
   @ManyToOne(() => Role, (role) => role.users, { eager: true })
   role: Role;
 

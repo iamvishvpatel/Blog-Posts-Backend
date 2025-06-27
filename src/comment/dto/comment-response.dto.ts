@@ -1,5 +1,7 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
+import { PostMainDto } from "src/post/dto/post-main.dto";
+import { UserMainDto } from "src/user/dto/user-main.dto";
 
 export class CommentResponseDto {
   @AutoMap()
@@ -8,10 +10,10 @@ export class CommentResponseDto {
   @AutoMap()
   content: string;
 
-  @AutoMap()
-  user: string;
+  @AutoMap(() => UserMainDto)
+  user: UserMainDto;
 
-  @AutoMap()
-  postId: number;
+  @AutoMap(() => PostMainDto)
+  post: PostMainDto;
   
 }

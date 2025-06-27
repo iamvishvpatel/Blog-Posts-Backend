@@ -24,15 +24,15 @@ export class UserMainDto {
   @ApiProperty()
   password: string;
 
-  @AutoMap()
+  @AutoMap(()=> RoleMainDto)
   @ApiProperty()
   role: RoleMainDto;
 
   // @AutoMap()
   // @ApiProperty()
-  // permissions: { id: number; name: string }[];
+  // permissions?: { id: number; name: string }[];
 
-  @AutoMap()
+  @AutoMap(()=> ProfileMainDto)
   @ApiProperty({ type: () => ProfileMainDto })
   profile: ProfileMainDto;
 

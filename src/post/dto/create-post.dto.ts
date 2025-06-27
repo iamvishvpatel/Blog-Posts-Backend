@@ -4,13 +4,13 @@ import { IsString, IsInt, IsArray, IsNotEmpty, IsOptional } from 'class-validato
 
 export class CreatePostDto {
   @AutoMap()
-  @ApiProperty({example:  "Nest Practice"})
+  @ApiProperty({example:  "My First Blog Post"})
   @IsString()
   @IsNotEmpty()
   title: string;
 
   @AutoMap()
-  @ApiProperty({ description: 'Author user ID', example: '2' })
+  @ApiProperty({ description: 'Author user ID', example: '21' })
   @IsInt()
   @IsOptional()
   authorId: number;

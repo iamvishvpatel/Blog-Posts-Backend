@@ -44,4 +44,8 @@ export class PostResponseDto {
 
   @ApiProperty()
   updatedAt: Date;
+
+  @ApiProperty()
+  @AutoMap()
+  updatedBy?: UserMainDto;
 }

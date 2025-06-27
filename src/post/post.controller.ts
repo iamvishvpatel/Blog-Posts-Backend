@@ -9,6 +9,7 @@ import {
   UseInterceptors,
   ParseIntPipe,
   Put,
+  Req,
 } from '@nestjs/common';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
@@ -35,7 +36,7 @@ import { Roles } from 'src/decorators/roles.decorator';
 import { Permissions } from 'src/decorators/permissions.decorator';
 
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'))
+@UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
 @ApiTags('Blog-Posts')
 @Controller('post')
 export class PostController {
@@ -49,8 +50,7 @@ export class PostController {
   ) {}
 
   @Post('create')
-  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
-  @Roles('admin')
+  @Roles('admin', 'user') //Admin & User: Create Post
   @Permissions('create_post')
   @ApiOperation({ summary: 'Create a new post' })
   @ApiResponse({ status: 201, description: 'Post created' })
@@ -58,8 +58,42 @@ export class PostController {
     return this.createPostService.create(createPostDto);
   }
 
+  @Put('edit/:id')
   @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
-  @Roles('admin') 
+  @Roles('admin', 'user') //Admin: Update Any Post
+  @Permissions('update_post')
+  @ApiOperation({ summary: 'Edit a post by ID' })
+  @ApiParam({ name: 'id', type: Number })
+  @ApiBody({
+    type: UpdatePostDto,
+    examples: {
+      default: {
+        value: {
+          title: 'Updated Blog Title',
+          authorId: 21,
+          categoryId: 5,
+          tagIds: [1, 3],
+          commentIds: [5, 7]
+        },
+      },
+    },
+  })
+  update(@Param('id', ParseIntPipe) id: number, @Body() dto: CreatePostDto, @Req() req: any) {
+    return this.updatePostService.update(id, dto, req.user);
+  }
+
+   @Delete('delete/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+  @Roles('admin', 'user')
+  @Permissions('delete_post')
+  @ApiResponse({ status: 200, description: 'Post deleted successfully' })
+  @ApiResponse({ status: 500, description: 'Post not found' })
+  @ApiOperation({ summary: 'Delete a post by ID' })
+  remove(@Param('id', ParseIntPipe) id: number, @Req() req) {
+    return this.deletePostService.remove(id, req.user);
+  }
+
+  @UseGuards(AuthGuard('jwt'), PermissionsGuard)
   @Permissions('manage_users')
   @Get('admin-only')
   getAdminData() {
@@ -90,37 +124,7 @@ export class PostController {
     return this.searchPostsService.search(dto);
   }
 
-  @Put('edit/:id')
-  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
-  @Roles('admin')
-  @Permissions('update_post')
-  @ApiOperation({ summary: 'Edit a post by ID' })
-  @ApiParam({ name: 'id', type: Number })
-  @ApiBody({
-    type: UpdatePostDto,
-    examples: {
-      default: {
-        value: {
-          title: 'Updated NestJS Auth Post',
-          authorId: 10,
-          categoryId: 5,
-          tagIds: [1, 3],
-        },
-      },
-    },
-  })
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: CreatePostDto) {
-    return this.updatePostService.update(id, dto);
-  }
+  
 
-  @Delete('delete/:id')
-  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
-  @Roles('admin')
-  @Permissions('delete_post')
-  @ApiResponse({ status: 200, description: 'Post deleted successfully' })
-  @ApiResponse({ status: 500, description: 'Post not found' })
-  @ApiOperation({ summary: 'Delete a post by ID' })
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.deletePostService.remove(id);
-  }
+ 
 }

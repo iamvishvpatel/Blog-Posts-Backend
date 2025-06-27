@@ -12,7 +12,7 @@ export class PermissionMainDto {
   description?: string;
 
   @AutoMap(()=> [RoleMainDto])
-  roles?: RoleMainDto
+  roles: RoleMainDto
 
   @AutoMap()
   createdAt: Date;

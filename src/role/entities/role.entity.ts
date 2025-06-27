@@ -52,3 +52,4 @@ export class Role {
   })
   updatedAt!: Date;
 }
+ 

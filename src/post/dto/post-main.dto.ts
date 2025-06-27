@@ -51,4 +51,8 @@ export class  PostMainDto {
   @ApiProperty()
   @AutoMap()
   updatedAt: Date;
+
+  @ApiProperty()
+  @AutoMap()
+  updatedBy?: UserMainDto;
 }

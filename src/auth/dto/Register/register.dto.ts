@@ -25,7 +25,7 @@ export class RegisterDto{
     bio?: string;
 
     @IsOptional()
-    @ApiProperty({example: 'user'})
+    @ApiProperty({example: 2})
     @IsInt()
     role: Role | number;
 }

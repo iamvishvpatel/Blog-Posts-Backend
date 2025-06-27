@@ -1,9 +1,20 @@
-import { AutoMap } from "@automapper/classes";
-import { Category } from "src/category/entities/category.entity";
-import { Comment } from "src/comment/entities/comment.entity";
-import { Tag } from "src/tag/entities/tag.entity";
-import { User } from "src/user/entities/user.entity";
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { AutoMap } from '@automapper/classes';
+import { Category } from 'src/category/entities/category.entity';
+import { Comment } from 'src/comment/entities/comment.entity';
+import { Tag } from 'src/tag/entities/tag.entity';
+import { User } from 'src/user/entities/user.entity';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  JoinTable,
+  ManyToMany,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Post {
@@ -19,7 +30,7 @@ export class Post {
   @AutoMap()
   author: User;
 
-  @OneToMany(() => Comment, (comment) => comment.post, {cascade: true})
+  @OneToMany(() => Comment, (comment) => comment.post, { cascade: true })
   @AutoMap()
   comments: Comment[];
 
@@ -39,5 +50,11 @@ export class Post {
   @UpdateDateColumn()
   @AutoMap()
   updatedAt: Date;
-}
 
+  @ManyToOne(() => User, { nullable: true })
+  @JoinColumn({ name: 'updatedById' })
+  updatedBy?: User;
+
+  @Column({ nullable: true })
+  updatedById?: number;
+}

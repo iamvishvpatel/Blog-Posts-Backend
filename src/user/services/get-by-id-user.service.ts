@@ -8,6 +8,6 @@ export class GetByIdUserService {
     constructor( private readonly userrepo: userRepo){}
     
     async  getById(id: number): Promise<UserResponseDto> {
-          return this.userrepo.getAsync(id);
+          return this.userrepo.getAsync(id, );
     }
 }

@@ -20,13 +20,13 @@ export class UserResponseDto {
   @AutoMap()
   password: string;
 
-  @AutoMap()
+  @AutoMap(()=> RoleMainDto)
   role:RoleMainDto
 
-  // @AutoMap()
-  // permissions: { id: number; name: string }[];
+//  @AutoMap()
+//   permissions?: { id: number; name: string }[];
 
-  @AutoMap()
+  @AutoMap(()=> ProfileMainDto)
   profile: ProfileMainDto;
 
   @AutoMap()

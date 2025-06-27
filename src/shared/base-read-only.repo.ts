@@ -49,6 +49,8 @@ export abstract class BaseReadOnlyRepo <TEntity extends ObjectLiteral, T, TKey, 
         where: key as any,
         relations: this.getRelations(),
       });
+      console.log(e, "data from base read only getASync ");
+      
       
       if(!e)
       {
@@ -68,7 +70,7 @@ export abstract class BaseReadOnlyRepo <TEntity extends ObjectLiteral, T, TKey, 
       const opts = this.createFilterOpts(filterObj);
       const es = await this.internalRepo.find(opts);
         //  console.dir(es[0], {  depth: null });
-        // console.log(es,"data");
+        console.log(es,"data from all async repo");
         
       return this.mapToModelArray(es);
     } catch (ex) {

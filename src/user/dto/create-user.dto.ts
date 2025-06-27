@@ -23,7 +23,7 @@ export class CreateUserDto {
   @MinLength(6)
   password: string;
 
-  @ApiProperty({ example: 'user', description: 'user or admin' })
+  @ApiProperty({ example: 1  })
   @AutoMap()
   @IsString()
   role: Role | number;

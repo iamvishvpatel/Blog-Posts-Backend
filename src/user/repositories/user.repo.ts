@@ -26,6 +26,6 @@ export class userRepo extends BaseRepo<User, UserMainDto, number>{
     }
 
     protected getRelations(): string[] {
-    return ['profile', 'roles', 'roles.permissions'];
+    return ['profile', 'role', 'role.permissions'];
   }
 }

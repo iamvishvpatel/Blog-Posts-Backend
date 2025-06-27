@@ -27,6 +27,6 @@ export class PostRepoService extends BaseRepo<Post, PostMainDto, number>{
   }
 
     protected getRelations(): string[] {
-    return ['author', 'category', 'tags', 'comments'];
+    return ['author', 'category', 'tags', 'comments', 'updatedBy'];
   }
 }
