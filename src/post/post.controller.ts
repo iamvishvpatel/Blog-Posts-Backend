@@ -29,6 +29,10 @@ import { DeletePostService } from './services/delete-post.service';
 import { FindPostByIdService } from './services/find-post-by-id.service';
 import { SearchPostsService } from './services/search-posts.service';
 import { FindAllPostService } from './services/find-all-post.service';
+import { RolesGuard } from 'src/guards/roles.guard';
+import { PermissionsGuard } from 'src/guards/permissions.guard';
+import { Roles } from 'src/decorators/roles.decorator';
+import { Permissions } from 'src/decorators/permissions.decorator';
 
 @ApiBearerAuth()
 @UseGuards(AuthGuard('jwt'))
@@ -45,10 +49,23 @@ export class PostController {
   ) {}
 
   @Post('create')
+  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+  @Roles('admin')
+  @Permissions('create_post')
   @ApiOperation({ summary: 'Create a new post' })
   @ApiResponse({ status: 201, description: 'Post created' })
   create(@Body() createPostDto: CreatePostDto) {
     return this.createPostService.create(createPostDto);
+  }
+
+  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+  @Roles('admin') 
+  @Permissions('manage_users')
+  @Get('admin-only')
+  getAdminData() {
+    return {
+      message: 'Only admins with manage_users permission can access this',
+    };
   }
 
   @Get('list')
@@ -74,6 +91,9 @@ export class PostController {
   }
 
   @Put('edit/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+  @Roles('admin')
+  @Permissions('update_post')
   @ApiOperation({ summary: 'Edit a post by ID' })
   @ApiParam({ name: 'id', type: Number })
   @ApiBody({
@@ -94,6 +114,9 @@ export class PostController {
   }
 
   @Delete('delete/:id')
+  @UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+  @Roles('admin')
+  @Permissions('delete_post')
   @ApiResponse({ status: 200, description: 'Post deleted successfully' })
   @ApiResponse({ status: 500, description: 'Post not found' })
   @ApiOperation({ summary: 'Delete a post by ID' })

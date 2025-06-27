@@ -19,6 +19,11 @@ import { Profile } from 'src/profile/entities/profile.entity';
 import { ProfileMainDto } from 'src/profile/dto/profile-main.dto';
 import { Tag } from 'src/tag/entities/tag.entity';
 import { TagMainDto } from 'src/tag/dto/tag-main.dto';
+import { permission } from 'process';
+import { PermissionMainDto } from 'src/role/dto/permission-main.dto';
+import { Permission } from 'src/role/entities/permission.entity';
+import { Role } from 'src/role/entities/role.entity';
+import { RoleMainDto } from 'src/role/dto/role-main.dto';
 
 @Injectable()
 export class PostProfile extends AutomapperProfile {
@@ -31,6 +36,9 @@ export class PostProfile extends AutomapperProfile {
       // createMap(mapper, Post, PostResponseDto)
       createMap(mapper, User, UserMainDto);
       // createMap(mapper, Post, PostMainDto)
+      createMap(mapper, Permission, PermissionMainDto)
+      createMap(mapper, Role, RoleMainDto);
+      createMap(mapper, Permission, PermissionMainDto)
       createMap(mapper, Comment, CommentMainDto);
       createMap(mapper, Profile, ProfileMainDto);
       createMap(mapper, Category, CategoryMainDto);

@@ -4,6 +4,7 @@ import { IsEmail, IsOptional, IsString, MinLength } from 'class-validator';
 import { UserMainDto } from './user-main.dto';
 import { Type } from 'class-transformer';
 import { CreateProfileDto } from 'src/profile/dto/create-profile.dto';
+import { Role } from 'src/role/entities/role.entity';
 
 export class CreateUserDto {
   @ApiProperty({ example: 'vishv patel' })
@@ -25,7 +26,7 @@ export class CreateUserDto {
   @ApiProperty({ example: 'user', description: 'user or admin' })
   @AutoMap()
   @IsString()
-  role: string;
+  role: Role | number;
 
   @IsOptional()
   @IsString()

@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { BaseRepo } from "src/shared";
 import { User } from "../entities/user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { FindManyOptions, Repository } from "typeorm";
+import { FindManyOptions, In, Repository } from "typeorm";
 import { Mapper } from "@automapper/core";
 import { InjectMapper } from "@automapper/nestjs";
 import { PinoLogger } from "nestjs-pino";
@@ -26,6 +26,6 @@ export class userRepo extends BaseRepo<User, UserMainDto, number>{
     }
 
     protected getRelations(): string[] {
-    return ['profile'];
+    return ['profile', 'roles', 'roles.permissions'];
   }
 }

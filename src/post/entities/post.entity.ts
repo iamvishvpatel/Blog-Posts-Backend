@@ -19,7 +19,7 @@ export class Post {
   @AutoMap()
   author: User;
 
-  @OneToMany(() => Comment, (comment) => comment.post)
+  @OneToMany(() => Comment, (comment) => comment.post, {cascade: true})
   @AutoMap()
   comments: Comment[];
 

@@ -40,6 +40,6 @@ export class CreatePostService {
       comments
     };
 
-    return this.postrepo.createAsync(post as Post);
+    return this.postrepo.createAsync(post as unknown as  Post);
   }
 }

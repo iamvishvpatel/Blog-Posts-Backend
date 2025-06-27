@@ -22,6 +22,8 @@ import { AuthModule } from './auth/auth.module';
 import { JwtService } from '@nestjs/jwt';
 import { RegisterService } from './auth/services/register.service';
 import { LoginService } from './auth/services/login.service';
+import { RoleModule } from './role/role.module';
+import { PermissionModule } from './role/permission.module';
 
 @Module({
   imports: [
@@ -56,6 +58,8 @@ import { LoginService } from './auth/services/login.service';
     CommentModule,
     TagModule,
     CategoryModule,
+    RoleModule,
+    PermissionModule,
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {
@@ -70,6 +74,7 @@ import { LoginService } from './auth/services/login.service';
       },
     }),
     AuthModule,
+    RoleModule,
   ],
   controllers: [AppController],
   providers: [AppService, RegisterService, LoginService, JwtService],

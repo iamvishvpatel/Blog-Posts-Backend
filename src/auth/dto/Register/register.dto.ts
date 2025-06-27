@@ -1,6 +1,7 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsIn, IsNotEmpty, IsOptional, MinLength } from "class-validator";
+import { IsEmail, IsIn, IsInt, IsNotEmpty, IsOptional, MinLength } from "class-validator";
+import { Role } from "src/role/entities/role.entity";
 
 export class RegisterDto{
     @IsNotEmpty()
@@ -25,6 +26,6 @@ export class RegisterDto{
 
     @IsOptional()
     @ApiProperty({example: 'user'})
-    @IsIn (['user', 'admin'])
-    role: 'user' | 'admin';
+    @IsInt()
+    role: Role | number;
 }
