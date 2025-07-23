@@ -23,10 +23,10 @@ export class PostRepoService extends BaseRepo<Post, PostMainDto, number>{
 
   protected override modifyFindOption(findOpts: FindManyOptions<Post>, filterObj: Partial<PostMainDto & IPageableFilterBase<number>> | Partial<PostMainDto & IFilterBase<number>>): void {
       super.modifyFindOption(findOpts, filterObj);
-      findOpts.relations = ['author', 'category', 'tags', 'comments'] 
+      findOpts.relations = ['author', 'category', 'tags', 'comments', 'comments.user', 'updatedBy'] 
   }
 
     protected getRelations(): string[] {
-    return ['author', 'category', 'tags', 'comments', 'updatedBy'];
+    return ['author', 'category', 'tags', 'comments', 'comments.user', 'updatedBy'];
   }
 }

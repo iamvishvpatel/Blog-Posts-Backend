@@ -20,4 +20,5 @@ export class PermissionsGuard implements CanActivate{
         return userPermissions.includes(reqPermissions[0])
 
     }  
-}
+} 
+

@@ -65,12 +65,12 @@ export abstract class BaseReadOnlyRepo <TEntity extends ObjectLiteral, T, TKey, 
     }
   }
 
-  public async allAsync(filterObj: TFilter): Promise<T[]> {
+  public async  allAsync(filterObj: TFilter): Promise<T[]> {
     try {
       const opts = this.createFilterOpts(filterObj);
       const es = await this.internalRepo.find(opts);
         //  console.dir(es[0], {  depth: null });
-        console.log(es,"data from all async repo");
+        // console.log(es,"data from all async repo");
         
       return this.mapToModelArray(es);
     } catch (ex) {
@@ -82,6 +82,8 @@ export abstract class BaseReadOnlyRepo <TEntity extends ObjectLiteral, T, TKey, 
   public async pagedAsync(filterObj: TPageableFilter): Promise<IPageable<T>> {
     try {
       const opts = this.createFilterOpts(filterObj);
+      console.log("options------------", opts);
+      
       const [es, count] = await this.internalRepo.findAndCount(opts);
       return {
         items: this.mapToModelArray(es),

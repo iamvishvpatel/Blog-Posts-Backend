@@ -36,7 +36,7 @@ import { Roles } from 'src/decorators/roles.decorator';
 import { Permissions } from 'src/decorators/permissions.decorator';
 
 @ApiBearerAuth()
-@UseGuards(AuthGuard('jwt'), RolesGuard, PermissionsGuard)
+@UseGuards(AuthGuard('jwt') , RolesGuard, PermissionsGuard)
 @ApiTags('Blog-Posts')
 @Controller('post')
 export class PostController {

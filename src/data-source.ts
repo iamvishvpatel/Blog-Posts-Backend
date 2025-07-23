@@ -11,11 +11,11 @@ import { Permission } from "./role/entities/permission.entity";
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'vishvPatel',
-    password: '@Abc@321@cba@321@',
-    database: 'Task-5-Seeder',
+    host: process.env.DB_HOST,
+    port: +process.env.DB_PORT!,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
     synchronize: false,
     entities: [User, Profile, Post, Comment, Tag, Category, Role, Permission],
     migrations: ['src/migrations/*.ts'],

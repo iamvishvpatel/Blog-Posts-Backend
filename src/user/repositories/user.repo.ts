@@ -22,7 +22,7 @@ export class userRepo extends BaseRepo<User, UserMainDto, number>{
 
   protected override modifyFindOption(findOpts: FindManyOptions<User>, filterObj: Partial<UserMainDto & IPageableFilterBase<number>> | Partial<UserMainDto & IFilterBase<number>>): void {
         super.modifyFindOption(findOpts, filterObj);
-        findOpts.relations = ['profile'] 
+        findOpts.relations = ['profile', "role" , 'role.permissions'] 
     }
 
     protected getRelations(): string[] {

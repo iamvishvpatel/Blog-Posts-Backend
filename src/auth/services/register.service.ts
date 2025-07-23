@@ -5,12 +5,14 @@ import { User } from 'src/user/entities/user.entity';
 import { ArgumentNilException } from 'src/exceptions';
 import { FindByEmailUserService } from 'src/user/services/find-by-email-user.service';
 import { CreateUserService } from 'src/user/services/create-user.service';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class RegisterService {
     constructor(
         private readonly findbyemailservice: FindByEmailUserService,
         private readonly createuserservice: CreateUserService,
+        private readonly jwtservice: JwtService,
       ) {}
     async register(dto: RegisterDto) {
         const existing = await this.findbyemailservice.findByEmail(dto.email);
@@ -35,6 +37,7 @@ export class RegisterService {
         const created = await this.createuserservice.create(user as User);
         // const profile = await this.profileRepo.createAsync({ bio: dto.bio });
     
-        return { message: 'User registered successfully', created };
+        return { message: 'User registered successfully',
+          access_token: this.jwtservice.sign(user), created };
       }
 }

@@ -6,14 +6,14 @@ import { CategoryMainDto } from './dto/category-main.dto';
 
 @Injectable()
 export class CategoryService {
-  constructor( private readonly categoryRepo: CategoryRepo){}
-  
+  constructor(private readonly categoryRepo: CategoryRepo) {}
+
   create(createCategoryDto: CreateCategoryDto) {
     return 'This action adds a new category';
   }
 
-  findAll() {
-    return `This action returns all category`;
+  async findAll(): Promise<CategoryMainDto[]> {
+    return this.categoryRepo.allAsync({});
   }
 
   findOne(id: number) {
@@ -29,6 +29,6 @@ export class CategoryService {
   }
 
   async getById(id: number): Promise<CategoryMainDto> {
-        return this.categoryRepo.getAsync(id);
+    return this.categoryRepo.getAsync(id);
   }
 }

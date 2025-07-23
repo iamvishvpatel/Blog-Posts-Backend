@@ -11,6 +11,9 @@ export class SearchPostsService {
     const where: any = {};
     if (dto.title) where.title = dto.title;
     if (dto.categoryId) where.category = { id: dto.categoryId };
+    if (dto.tagIds && dto.tagIds.length > 0) {
+      where.tags = { id: dto.tagIds[0] };
+    }
     if (dto.page) where.$page = dto.page;
     if (dto.limit) where.$perPage = dto.limit;
 

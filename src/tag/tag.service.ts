@@ -11,8 +11,8 @@ export class TagService {
     return 'This action adds a new tag';
   }
 
-  findAll() {
-    return `This action returns all tag`;
+  async findAll(){
+    return this.tagrepo.allAsync({})
   }
 
   findOne(id: number) {

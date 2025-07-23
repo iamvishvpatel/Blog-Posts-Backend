@@ -9,6 +9,7 @@ import { CommentRepo } from 'src/comment/repositories/comment.repo';
 import { GetByIdUserService } from 'src/user/services/get-by-id-user.service';
 import { PostResponseDto } from '../dto/post-response.dto';
 import { RPCNotFoundException } from 'src/shared/exceptions/notfound.exception';
+import { log } from 'console';
 
 @Injectable()
 export class CreatePostService {
@@ -21,6 +22,8 @@ export class CreatePostService {
   ) {}
 
   async create(dto: CreatePostDto): Promise<PostResponseDto> {
+    console.log(dto, "dto from  post ");
+    
     const author = await this.getByIdService.getById(dto.authorId);
     const category = await this.categoryService.getById(dto.categoryId);
     const tags = await this.tagrepo.findByIDs(dto.tagIds || []);
@@ -34,11 +37,13 @@ export class CreatePostService {
     
     const post = {
       title: dto.title,
+      content: dto.content,
       author,
       category,
       tags,
       comments
     };
+console.log(post, "----post");
 
     return this.postrepo.createAsync(post as unknown as  Post);
   }

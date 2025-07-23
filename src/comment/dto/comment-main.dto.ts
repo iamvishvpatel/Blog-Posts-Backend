@@ -1,4 +1,3 @@
-// src/comment/dto/comment-main.dto.ts
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
 import { PostMainDto } from 'src/post/dto/post-main.dto';

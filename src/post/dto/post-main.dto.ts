@@ -29,6 +29,10 @@ export class  PostMainDto {
   title: string;
 
   @AutoMap()
+  @ApiProperty({example: 'This is the Updated body of the post'})
+  content: string;
+
+  @AutoMap()
   @ApiProperty({ type: () => UserMainDto, example: 10 })
   author: UserMainDto;
 

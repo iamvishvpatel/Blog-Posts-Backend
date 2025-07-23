@@ -9,9 +9,12 @@ export class SearchPostDto {
 
   @IsOptional()
   @ApiProperty({example: '5'})
-  @IsNumber()
   categoryId?: number;
 
+  @IsOptional()
+  @ApiProperty({example: [2, 4]})
+  tagIds?: number[];
+  
   @IsOptional()
   @ApiProperty({example: '1'})
   @IsNumber()

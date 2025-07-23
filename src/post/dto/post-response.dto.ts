@@ -27,6 +27,9 @@ export class PostResponseDto {
   title: string;
 
   @AutoMap()
+  content: string;
+
+  @AutoMap()
   author: UserMainDto;
 
   @AutoMap()

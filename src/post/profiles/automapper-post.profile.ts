@@ -24,6 +24,7 @@ import { PermissionMainDto } from 'src/role/dto/permission-main.dto';
 import { Permission } from 'src/role/entities/permission.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { RoleMainDto } from 'src/role/dto/role-main.dto';
+import { format } from 'path';
 
 @Injectable()
 export class PostProfile extends AutomapperProfile {
@@ -47,15 +48,31 @@ export class PostProfile extends AutomapperProfile {
           mapFrom((src) => src.permissions),
         ),
       );
-      createMap(mapper, Comment, CommentMainDto);
       createMap(mapper, Profile, ProfileMainDto);
       createMap(mapper, Category, CategoryMainDto);
       createMap(mapper, Tag, TagMainDto);
-
+      
+      createMap(
+        mapper, 
+        Comment, 
+        CommentMainDto, 
+        forMember(
+          (dto)=> dto.user, 
+          mapFrom(src => src.user)
+        ),
+        forMember(
+          (dto)=> dto.post, 
+          mapFrom(src => src.post)
+        )
+      );
       createMap(
         mapper,
         Post,
         PostMainDto,
+        forMember(
+          (dto) => dto.content,
+          mapFrom((src) => src.content),
+        ),
         forMember(
           (dto) => dto.author,
           mapFrom((src) => src.author),
@@ -72,7 +89,10 @@ export class PostProfile extends AutomapperProfile {
           (dto) => dto.comments,
           mapFrom((src) => src.comments),
         ),
-        forMember((dto) => dto.updatedBy, mapFrom((src) => src.updatedBy)),
+        forMember(
+          (dto) => dto.updatedBy,
+          mapFrom((src) => src.updatedBy),
+        ),
       );
     };
   }

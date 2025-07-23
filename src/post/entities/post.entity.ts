@@ -26,6 +26,10 @@ export class Post {
   @AutoMap()
   title: string;
 
+  @Column({ type: 'text', nullable: true })
+  @AutoMap()
+  content: string
+
   @ManyToOne(() => User, (user) => user.posts)
   @AutoMap()
   author: User;

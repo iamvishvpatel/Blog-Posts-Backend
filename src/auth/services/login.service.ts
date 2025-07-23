@@ -24,7 +24,7 @@ export class LoginService {
     
         return {
           access_token: this.jwtservice.sign(data),
-          user,
+          user: user,
         };
       }
 }

@@ -1,4 +1,3 @@
-// src/category/dto/category-main.dto.ts
 
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";

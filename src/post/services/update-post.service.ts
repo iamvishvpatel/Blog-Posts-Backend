@@ -30,6 +30,7 @@ export class UpdatePostService {
 
       const updatedPost = {
         title: dto.title ?? post.title,
+        content: dto.content ?? post.content,
         author: dto.authorId ? ({ id: dto.authorId } as User) : post.author,
         category: dto.categoryId
           ? ({ id: dto.categoryId } as Category)

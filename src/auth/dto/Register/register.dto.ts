@@ -26,6 +26,6 @@ export class RegisterDto{
 
     @IsOptional()
     @ApiProperty({example: 2})
-    @IsInt()
+    // @IsInt()
     role: Role | number;
 }

@@ -10,6 +10,12 @@ export class CreatePostDto {
   title: string;
 
   @AutoMap()
+  @ApiProperty({example:  "This is the body of the post"})
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
+  @AutoMap()
   @ApiProperty({ description: 'Author user ID', example: '21' })
   @IsInt()
   @IsOptional()
@@ -22,14 +28,13 @@ export class CreatePostDto {
   tagIds: number[];
 
   @AutoMap()
-  @IsNotEmpty()
+  @IsOptional()
   @ApiProperty({ type: [Number], description: 'Array of comment IDs', example: [5,7] })
   @IsArray()
   commentIds: number[];
 
   @AutoMap()
   @ApiProperty({ description: 'Category ID', example: '4' })
-  @IsInt()
   @IsNotEmpty()
   categoryId: number;
 }
