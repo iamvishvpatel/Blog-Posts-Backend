@@ -7,7 +7,8 @@ export class TagMainDto {
   @AutoMap()
   @ApiProperty()
   id: number;
+  
   @AutoMap()
   @ApiProperty()
-  name: string;
+  name?: string;
 }

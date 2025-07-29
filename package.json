@@ -8,7 +8,7 @@
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "nest start --watch",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
@@ -22,7 +22,7 @@
     "migration:generate": "npm run typeorm -- migration:generate src/migrations/InitSchema --dataSource src/data-source.ts",
     "migration:create": "npm run typeorm -- migration:create src/migrations/InitSchema --dataSource src/data-source.ts",
     "migration:run": "npm run typeorm -- migration:run --dataSource src/data-source.ts",
-    "migration:revert": "npm run typeorm -- migration:revert --dataSource src/data-source.ts",
+    "migration:revert": "npm run typeorm -- mi gration:revert --dataSource src/data-source.ts",
     "seed": "ts-node -r tsconfig-paths/register src/seed/seed.ts"
   },
   "dependencies": {
@@ -43,6 +43,7 @@
     "bcrypt": "^6.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.2",
+    "dotenv": "^17.2.1",
     "nestjs-pino": "^4.4.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

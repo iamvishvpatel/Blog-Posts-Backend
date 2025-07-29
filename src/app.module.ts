@@ -79,4 +79,5 @@ import { PermissionModule } from './role/permission.module';
   controllers: [AppController],
   providers: [AppService, RegisterService, LoginService, JwtService],
 })
-export class AppModule {}
+export class  AppModule {}
+   

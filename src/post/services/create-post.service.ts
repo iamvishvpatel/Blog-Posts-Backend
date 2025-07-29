@@ -10,6 +10,9 @@ import { GetByIdUserService } from 'src/user/services/get-by-id-user.service';
 import { PostResponseDto } from '../dto/post-response.dto';
 import { RPCNotFoundException } from 'src/shared/exceptions/notfound.exception';
 import { log } from 'console';
+import { PostMainDto } from '../dto/post-main.dto';
+import { InjectMapper } from '@automapper/nestjs';
+import { Mapper } from '@automapper/core';
 
 @Injectable()
 export class CreatePostService {
@@ -18,7 +21,8 @@ export class CreatePostService {
     private readonly getByIdService: GetByIdUserService,
     private readonly categoryService: CategoryService,
     private readonly tagrepo: TagRepo,
-    private readonly commentrepo: CommentRepo
+    private readonly commentrepo: CommentRepo,
+    @InjectMapper() private readonly mapper: Mapper,
   ) {}
 
   async create(dto: CreatePostDto): Promise<PostResponseDto> {
@@ -44,7 +48,7 @@ export class CreatePostService {
       comments
     };
 console.log(post, "----post");
-
-    return this.postrepo.createAsync(post as unknown as  Post);
+    const mapped = this.mapper.map(dto, CreatePostDto, PostMainDto);
+    return this.postrepo.createAsync(mapped);
   }
 }

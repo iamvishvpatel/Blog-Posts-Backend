@@ -14,7 +14,7 @@ import { GetByIdUserService } from './services/get-by-id-user.service';
     AutomapperModule
   ],
   controllers: [UserController],
-  providers: [CreateUserService,FindByEmailUserService, GetByIdUserService, userRepo, FindByEmailUserService, CreateUserService, GetByIdUserService ],
+  providers: [CreateUserService,FindByEmailUserService, GetByIdUserService, userRepo],
   exports: [CreateUserService, FindByEmailUserService, GetByIdUserService, userRepo]
 })
 export class UserModule {}

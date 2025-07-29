@@ -6,13 +6,13 @@ import { RPCNotFoundException } from 'src/shared/exceptions/notfound.exception';
 export class DeleteCommentService {
      constructor(private readonly commentRepo: CommentRepo) {}
     async remove(id: number) {
-        const post = await this.commentRepo.allAsync({id});
-                if(post.length == 0) throw new RPCNotFoundException(`Comment with ID ${id} not exist`)
+        const comment = await this.commentRepo.allAsync({id});
+                if(comment.length == 0) throw new RPCNotFoundException(`Comment with ID ${id} not exist`)
                 
               
                 const deleted = await this.commentRepo.deleteAsync(id)
                 console.log(deleted, "deleted");
                 
-                return {message: `Post with ID ${id} deleted successfully`, deleted};
+                return {message: `Comment with ID ${id} deleted successfully`, deleted};
       }
 }

@@ -1,4 +1,3 @@
-import { an } from '@faker-js/faker/dist/airline-BUL6NtOJ';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';

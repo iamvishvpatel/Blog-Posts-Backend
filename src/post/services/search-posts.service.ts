@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { PostRepoService } from '../repositories/post.repo';
 import { SearchPostDto } from '../dto/search-post.dto';
-import { IPageable } from 'src/shared/filtering';
+import { EOrder, IPageable } from 'src/shared/filtering';
 import { PostResponseDto } from '../dto/post-response.dto';
 
 @Injectable()
@@ -16,6 +16,8 @@ export class SearchPostsService {
     }
     if (dto.page) where.$page = dto.page;
     if (dto.limit) where.$perPage = dto.limit;
+    where.$orderBy = 'createdAt';
+    where.$order = EOrder.Desc;
 
     return this.postrepo.pagedAsync(where);
   }

@@ -12,7 +12,7 @@ import { Tag } from "src/tag/entities/tag.entity";
 
 
 @Injectable()
-export class PostRepoService extends BaseRepo<Post, PostMainDto, number>{
+export class  PostRepoService extends BaseRepo<Post, PostMainDto, number>{
     constructor(
     @InjectRepository(Post) private readonly postRepo: Repository<Post>,
     @InjectMapper() private readonly classMapper: Mapper,

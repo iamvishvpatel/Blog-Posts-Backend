@@ -9,16 +9,20 @@ import { RoleRepo } from './repositories/role.repo';
 import { PermissionRepo } from './repositories/permission.repo';
 import { RoleMainDto } from './dto/role-main.dto';
 import { RpcBaseException } from 'src/shared/exceptions';
+import { InjectMapper } from '@automapper/nestjs';
+import { Mapper } from '@automapper/core';
 
 @Injectable()
 export class RoleService {
   constructor(
     private readonly roleRepo: RoleRepo,
     private readonly permissionRepo: PermissionRepo,
+    @InjectMapper() private readonly mapper: Mapper,
   ) {}
 
   async create(dto: CreateRoleDto) {
-    return this.roleRepo.createAsync(dto as unknown as RoleMainDto);
+    const mapped = this.mapper.map(dto, CreateRoleDto, RoleMainDto);
+    return this.roleRepo.createAsync(mapped);
   }
 
   async findAll() {
@@ -52,13 +56,16 @@ export class RoleService {
     console.log(deleted, 'deleted');
 
     return { message: `Role with ID ${id} deleted successfully`, deleted };
-  }   
+  }
 
-  async assignPermission(roleId: number, permissionIds: number[]){
+  async assignPermission(roleId: number, permissionIds: number[]) {
     const role = await this.roleRepo.getAsync(roleId);
-    if (!role) throw new RPCNotFoundException(`Role with ID ${roleId} not found`);
+    if (!role)
+      throw new RPCNotFoundException(`Role with ID ${roleId} not found`);
 
-    const permissions = await this.permissionRepo.allAsync({$ids : permissionIds})
+    const permissions = await this.permissionRepo.allAsync({
+      $ids: permissionIds,
+    });
     const updated: RoleMainDto = { ...role, permissions };
     return this.roleRepo.updateAsync(updated);
   }

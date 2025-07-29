@@ -15,8 +15,10 @@ export class UpdatePostService {
   ) {}
 
   async update(id: number, dto: UpdatePostDto, user: any) {
-    const post_arr = await this.postrepo.allAsync({ id });
-    const post = post_arr[0];
+    
+    const post = await this.postrepo.getAsync(id);
+
+
     if (!dto.authorId) throw new ArgumentNilException('No Author id found.');
     console.log(post, 'post data ');
     console.log('------------',post.author.id, user, user.userId,  'it data ');
@@ -31,16 +33,14 @@ export class UpdatePostService {
       const updatedPost = {
         title: dto.title ?? post.title,
         content: dto.content ?? post.content,
-        author: dto.authorId ? ({ id: dto.authorId } as User) : post.author,
-        category: dto.categoryId
-          ? ({ id: dto.categoryId } as Category)
-          : post.category,
-        tags: dto.tagIds ? dto.tagIds.map((id) => ({ id }) as Tag) : post.tags,
+        authorId: dto.authorId ?? post.authorId,
+        categoryId: dto.categoryId ?? post.categoryId,
+        tags: dto.tagIds ? dto.tagIds.map((id) => ({ id })) : post.tags,
         updatedById: user.userId,
       };
 
       await this.postrepo.updateAsync({ ...post, ...updatedPost });
-      
+       
 
 
     } else {

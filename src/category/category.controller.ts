@@ -33,7 +33,7 @@ export class CategoryController {
   }
 
   @Get(':id') //--- worked method
-  async getUser(@Param('id') id: number) {
+  async getCategory(@Param('id') id: number) {
     return this.categoryService.getById(id);
   }
 }

@@ -70,6 +70,7 @@ export class PostController {
       default: {
         value: {
           title: 'Updated Blog Title',
+          content: 'Updated Blog content',
           authorId: 21,
           categoryId: 5,
           tagIds: [1, 3],
@@ -78,7 +79,7 @@ export class PostController {
       },
     },
   })
-  update(@Param('id', ParseIntPipe) id: number, @Body() dto: CreatePostDto, @Req() req: any) {
+  update(@Param('id',) id: number, @Body() dto: CreatePostDto, @Req() req: any) {
     return this.updatePostService.update(id, dto, req.user);
   }
 

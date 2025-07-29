@@ -24,5 +24,6 @@ export class SearchPostDto {
   @IsNumber()
   @ApiProperty({example: '5'})
   limit: number = 10;
+
 }
  

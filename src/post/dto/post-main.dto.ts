@@ -48,6 +48,12 @@ export class  PostMainDto {
   @ApiProperty({ type: () => [CommentMainDto] })
   comments: CommentMainDto[];
 
+  @AutoMap()
+  authorId: number
+
+  @AutoMap()
+  categoryId: number
+
   @ApiProperty()
   @AutoMap()
   createdAt: Date;

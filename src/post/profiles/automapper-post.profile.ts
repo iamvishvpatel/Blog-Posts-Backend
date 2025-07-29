@@ -25,6 +25,12 @@ import { Permission } from 'src/role/entities/permission.entity';
 import { Role } from 'src/role/entities/role.entity';
 import { RoleMainDto } from 'src/role/dto/role-main.dto';
 import { format } from 'path';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { CreatePostDto } from '../dto/create-post.dto';
+import { CreatePermissionDto } from 'src/role/dto/create-permission.dto';
+import { CreateRoleDto } from 'src/role/dto/create-role.dto';
+import { CreateCommentDto } from 'src/comment/dto/create-comment.dto';
+import { UpdateCommentDto } from 'src/comment/dto/update-comment.dto';
 
 @Injectable()
 export class PostProfile extends AutomapperProfile {
@@ -51,19 +57,24 @@ export class PostProfile extends AutomapperProfile {
       createMap(mapper, Profile, ProfileMainDto);
       createMap(mapper, Category, CategoryMainDto);
       createMap(mapper, Tag, TagMainDto);
-      
+      createMap(mapper, CreateUserDto, UserMainDto);
+      createMap(mapper, CreatePostDto, PostMainDto);
+      createMap(mapper, CreatePermissionDto, PermissionMainDto)
+      createMap(mapper, CreateRoleDto, RoleMainDto)
+      createMap(mapper, CreateCommentDto, CommentMainDto)
+      createMap(mapper, UpdateCommentDto, CommentMainDto)
       createMap(
-        mapper, 
-        Comment, 
-        CommentMainDto, 
+        mapper,
+        Comment,
+        CommentMainDto,
         forMember(
-          (dto)=> dto.user, 
-          mapFrom(src => src.user)
+          (dto) => dto.user,
+          mapFrom((src) => src.user),
         ),
         forMember(
-          (dto)=> dto.post, 
-          mapFrom(src => src.post)
-        )
+          (dto) => dto.post,
+          mapFrom((src) => src.post),
+        ),
       );
       createMap(
         mapper,

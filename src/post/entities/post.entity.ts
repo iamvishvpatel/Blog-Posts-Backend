@@ -30,8 +30,13 @@ export class Post {
   @AutoMap()
   content: string
 
+  @Column()
+  @AutoMap()
+  authorId: number;
+
   @ManyToOne(() => User, (user) => user.posts)
   @AutoMap()
+  @JoinColumn({name: 'authorId'})
   author: User;
 
   @OneToMany(() => Comment, (comment) => comment.post, { cascade: true })
@@ -43,8 +48,13 @@ export class Post {
   @JoinTable()
   tags: Tag[];
 
+  @AutoMap()
+  @Column()
+  categoryId: number
+
   @ManyToOne(() => Category, (category) => category.posts)
   @AutoMap()
+  @JoinColumn({ name: 'categoryId' })
   category: Category;
 
   @CreateDateColumn()
