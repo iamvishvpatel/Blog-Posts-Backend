@@ -67,8 +67,10 @@ export class Post {
 
   @ManyToOne(() => User, { nullable: true })
   @JoinColumn({ name: 'updatedById' })
+  @AutoMap()
   updatedBy?: User;
 
   @Column({ nullable: true })
-  updatedById?: number;
+  @AutoMap()
+  updatedById: number;
 }

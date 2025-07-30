@@ -1,8 +1,12 @@
 import { AutoMap } from '@automapper/classes';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsInt, IsArray, IsNotEmpty, IsOptional } from 'class-validator';
+import { IsString, IsInt, IsArray, IsNotEmpty, IsOptional, IsNumber } from 'class-validator';
 
 export class CreatePostDto {
+
+  @AutoMap()
+  id?:number;
+
   @AutoMap()
   @ApiProperty({example:  "My First Blog Post"})
   @IsString()
@@ -35,7 +39,7 @@ export class CreatePostDto {
 
   @AutoMap()
   @ApiProperty({ description: 'Category ID', example: '4' })
-  @IsNotEmpty()
+  @IsNumber()
   categoryId: number;
 }
 

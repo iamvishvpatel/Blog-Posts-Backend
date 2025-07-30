@@ -39,7 +39,16 @@ export class User {
   // role: string;
 
   @AutoMap()
+  @Column()
+  roleId: number;
+
+  @AutoMap()
   @ManyToOne(() => Role, (role) => role.users, { eager: true })
+  @JoinColumn({
+    name: 'roleId',
+    referencedColumnName: 'id',
+    foreignKeyConstraintName: 'roleId',
+  })
   role: Role;
 
   @AutoMap()

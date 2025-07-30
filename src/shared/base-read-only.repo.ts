@@ -49,7 +49,7 @@ export abstract class BaseReadOnlyRepo <TEntity extends ObjectLiteral, T, TKey, 
         where: key as any,
         relations: this.getRelations(),
       });
-      console.log(e, "data from base read only getASync ");
+      // console.log(e, "data from base read only getASync ");
       
       
       if(!e)

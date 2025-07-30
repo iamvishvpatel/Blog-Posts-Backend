@@ -18,10 +18,12 @@ export class UpdatePostService {
     
     const post = await this.postrepo.getAsync(id);
 
-
+    console.log("-----",dto.categoryId);
+    console.log("--------",post.categoryId, "from updated");
+    
     if (!dto.authorId) throw new ArgumentNilException('No Author id found.');
-    console.log(post, 'post data ');
-    console.log('------------',post.author.id, user, user.userId,  'it data ');
+    // console.log(post, 'post data ');
+    // console.log('------------',post.author.id, user, user.userId,  'it data ');
 
     if (post.author.id === user.userId || user.role.name === 'admin') {
       const author = await this.getByIdService.getById(dto.authorId);
@@ -30,16 +32,19 @@ export class UpdatePostService {
         throw new RpcBaseException(`Post with ID ${id} not found`, 404);
       }
 
-      const updatedPost = {
-        title: dto.title ?? post.title,
-        content: dto.content ?? post.content,
-        authorId: dto.authorId ?? post.authorId,
-        categoryId: dto.categoryId ?? post.categoryId,
-        tags: dto.tagIds ? dto.tagIds.map((id) => ({ id })) : post.tags,
-        updatedById: user.userId,
-      };
+      
+        post.title= dto.title ?? post.title,
+        post.content= dto.content ?? post.content,
+        post.authorId= dto.authorId ?? post.authorId,
+        post.categoryId= dto.categoryId ?? post.categoryId,
+        post.category.id = dto.categoryId ? dto.categoryId : post.category.id;
+        post.tags= dto.tagIds ? dto.tagIds.map((id) => ({ id })) : post.tags,
+        post.updatedById= user.userId,
+      
+      console.log("updateddddddddddddd", post);
+      
 
-      await this.postrepo.updateAsync({ ...post, ...updatedPost });
+      await this.postrepo.updateAsync(post);
        
 
 

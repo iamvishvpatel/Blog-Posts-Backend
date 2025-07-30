@@ -1,6 +1,7 @@
 // src/user/dto/user-main.dto.ts
 
 import { AutoMap } from '@automapper/classes';
+import { autoMap } from '@automapper/core';
 import { ApiProperty } from '@nestjs/swagger';
 import { CommentMainDto } from 'src/comment/dto/comment-main.dto';
 import { PostMainDto } from 'src/post/dto/post-main.dto';
@@ -27,6 +28,9 @@ export class UserMainDto {
   @AutoMap(()=> RoleMainDto)
   @ApiProperty()
   role: RoleMainDto;
+
+  @AutoMap()
+  roleId: number;
 
   // @AutoMap()
   // @ApiProperty()

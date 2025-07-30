@@ -79,7 +79,7 @@ export class PostController {
       },
     },
   })
-  update(@Param('id',) id: number, @Body() dto: CreatePostDto, @Req() req: any) {
+  update(@Param('id',) id: number, @Body() dto: UpdatePostDto, @Req() req: any) {
     return this.updatePostService.update(id, dto, req.user);
   }
 

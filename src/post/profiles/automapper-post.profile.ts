@@ -31,6 +31,7 @@ import { CreatePermissionDto } from 'src/role/dto/create-permission.dto';
 import { CreateRoleDto } from 'src/role/dto/create-role.dto';
 import { CreateCommentDto } from 'src/comment/dto/create-comment.dto';
 import { UpdateCommentDto } from 'src/comment/dto/update-comment.dto';
+import { UpdatePostDto } from '../dto/update-post.dto';
 
 @Injectable()
 export class PostProfile extends AutomapperProfile {
@@ -57,8 +58,15 @@ export class PostProfile extends AutomapperProfile {
       createMap(mapper, Profile, ProfileMainDto);
       createMap(mapper, Category, CategoryMainDto);
       createMap(mapper, Tag, TagMainDto);
-      createMap(mapper, CreateUserDto, UserMainDto);
+      createMap(mapper, CreateUserDto, UserMainDto,forMember(
+          (dto) => dto.profile,
+          mapFrom((src) => src.profile),
+        ),);
       createMap(mapper, CreatePostDto, PostMainDto);
+      createMap(mapper, UpdatePostDto, PostMainDto,forMember(
+          (dto) => dto.id,
+          mapFrom((src) => src.id),
+        ), );
       createMap(mapper, CreatePermissionDto, PermissionMainDto)
       createMap(mapper, CreateRoleDto, RoleMainDto)
       createMap(mapper, CreateCommentDto, CommentMainDto)

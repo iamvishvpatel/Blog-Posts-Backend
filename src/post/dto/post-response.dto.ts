@@ -1,11 +1,11 @@
 // import { CreateUserDto } from "src/user/dto/create-user.dto";
 
-import { AutoMap } from "@automapper/classes";
-import { ApiProperty } from "@nestjs/swagger";
-import { CategoryMainDto } from "src/category/dto/category-main.dto";
-import { CommentMainDto } from "src/comment/dto/comment-main.dto";
-import { TagMainDto } from "src/tag/dto/tag-main.dto";
-import { UserMainDto } from "src/user/dto/user-main.dto";
+import { AutoMap } from '@automapper/classes';
+import { ApiProperty } from '@nestjs/swagger';
+import { CategoryMainDto } from 'src/category/dto/category-main.dto';
+import { CommentMainDto } from 'src/comment/dto/comment-main.dto';
+import { TagMainDto } from 'src/tag/dto/tag-main.dto';
+import { UserMainDto } from 'src/user/dto/user-main.dto';
 
 // export class PostMainDto{
 //     id: number;
@@ -16,8 +16,6 @@ import { UserMainDto } from "src/user/dto/user-main.dto";
 //     category: string;
 
 // }
-
-
 
 export class PostResponseDto {
   @AutoMap()
@@ -41,7 +39,9 @@ export class PostResponseDto {
   @AutoMap()
   comments: CommentMainDto[];
 
-
+  @AutoMap()
+  categoryId: number;
+  
   @AutoMap()
   createdAt: Date;
 
@@ -51,4 +51,7 @@ export class PostResponseDto {
   @ApiProperty()
   @AutoMap()
   updatedBy?: UserMainDto;
+
+  @AutoMap()
+  updatedById: number;
 }

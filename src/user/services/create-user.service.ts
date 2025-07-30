@@ -12,7 +12,10 @@ export class CreateUserService {
     @InjectMapper() private readonly mapper: Mapper,
   ) {}
   async create(dto: CreateUserDto): Promise<UserMainDto> {
+console.log("dtooooooooooooo", dto);
+
     const userDto = this.mapper.map(dto, CreateUserDto, UserMainDto);
+    console.log("userdtooooooooooooooo", userDto);
     return this.userrepo.createAsync(userDto);
   }
 }

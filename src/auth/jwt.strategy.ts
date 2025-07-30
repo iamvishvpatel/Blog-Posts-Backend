@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 
   async validate(data: any) {
     const user = await this.userService.getById(data.sub);
-    console.log(user, 'log user from jwt strategy file');
+    // console.log(user, 'log user from jwt strategy file');
 
     // console.log(user.role.permissions, 'role permissions from entity');
     const role = user.role;

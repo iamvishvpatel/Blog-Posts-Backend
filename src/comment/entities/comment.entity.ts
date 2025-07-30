@@ -27,7 +27,7 @@ export class Comment {
   user: User;
 
   @AutoMap()
-  @ManyToOne(() => Post, (post) => post.comments)
+  @ManyToOne(() => Post, (post) => post.comments, { onDelete: 'CASCADE' })
     @JoinColumn({
     name:'postId',
     referencedColumnName:'id',

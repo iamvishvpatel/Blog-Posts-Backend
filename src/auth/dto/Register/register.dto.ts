@@ -1,6 +1,6 @@
 import { AutoMap } from "@automapper/classes";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsEmail, IsIn, IsInt, IsNotEmpty, IsOptional, MinLength } from "class-validator";
+import { IsEmail, IsIn, IsInt, IsNotEmpty, IsNumber, IsOptional, MinLength } from "class-validator";
 import { Role } from "src/role/entities/role.entity";
 
 export class RegisterDto{
@@ -21,11 +21,17 @@ export class RegisterDto{
     password: string;
 
     @IsOptional()
+    @AutoMap()
     @ApiProperty({example: 'Software Developer'})
     bio?: string;
 
-    @IsOptional()
+    // @IsOptional()
+    // @ApiProperty({example: 2})
+    // // @IsInt()
+    // role?: Role ;
+
     @ApiProperty({example: 2})
-    // @IsInt()
-    role: Role | number;
+    @AutoMap()
+    @IsNumber()
+    roleId: number;
 }

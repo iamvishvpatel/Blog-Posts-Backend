@@ -9,7 +9,6 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Permission } from './permission.entity';
-import { permission } from 'process';
 import { User } from 'src/user/entities/user.entity';
 import { AutoMap } from '@automapper/classes';
 

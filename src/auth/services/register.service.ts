@@ -29,12 +29,12 @@ export class RegisterService {
           username: dto.name,
           email: dto.email,
           password: hashedPassword,
-          role: dto.role,
+          roleId: dto.roleId,
           profile: {
             bio: dto.bio
           },
         };
-        const created = await this.createuserservice.create(user as User);
+        const created = await this.createuserservice.create(user);
         // const profile = await this.profileRepo.createAsync({ bio: dto.bio });
     
         return { message: 'User registered successfully',
